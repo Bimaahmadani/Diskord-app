@@ -67,8 +67,5 @@ export default function Home() {
   if (!homeState) {
     return <LoadingIndicator />;
   }
-  return <div><h1>Welcome to the Diskord</h1></div>
-
-
- 
+  return <div><h1>Welcome to the Diskord</h1></div> 
 }
