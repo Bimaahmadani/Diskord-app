@@ -1,5 +1,6 @@
 import { useClerk } from "@clerk/nextjs";
-import { useCallback, useState } from "react";
+import { get } from "http";
+import { useCallback, useEffect, useState } from "react";
 import { User } from "stream-chat";
 import { LoadingIndicator } from "stream-chat-react";
 
@@ -63,6 +64,29 @@ export default function Home() {
     };
 
   }
+
+  useEffect(() => {
+    if(
+      clerkUser?.id &&
+      clerkUser?.primaryEmailAddress?.emailAddress &&
+      !clerkUser.publicMetadata.streamRegistered
+    ) {
+      registerUser().then((result) => {
+        getUserToken(
+          clerkUser.id,
+          clerkUser?.primaryEmailAddress?.emailAddress || 'Unknown'
+        );
+    });
+  } else{
+    // take user and get token
+    if(clerkUser?.id){
+      getUserToken(
+        clerkUser.id,
+        clerkUser?.primaryEmailAddress?.emailAddress || 'Unknown'
+      )
+    }
+  }
+  }, [registerUser, clerkUser]);
 
   if (!homeState) {
     return <LoadingIndicator />;
