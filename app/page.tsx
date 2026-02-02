@@ -1,3 +1,5 @@
+'use client';
+
 import { useClerk } from "@clerk/nextjs";
 import { get } from "http";
 import { useCallback, useEffect, useState } from "react";
@@ -19,7 +21,7 @@ export default function Home() {
     const userId = clerkUser?.id;
     const mail = clerkUser?.primaryEmailAddress?.emailAddress;
     if (userId && mail) {
-      const response = await fetch('/api/registerUser', {
+      const response = await fetch('/api/register-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +60,7 @@ export default function Home() {
       image : `https://getstream.io/random_png/?id=${userId}&name=${userName}`,
     };
 
-    const apiKey = process.env.STREAM_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
     if(apiKey) {
       setHomeState ({apiKey : apiKey, user: user, token : token});
     };
@@ -91,5 +93,5 @@ export default function Home() {
   if (!homeState) {
     return <LoadingIndicator />;
   }
-  return <div><h1>Welcome to the Diskord</h1></div> 
+  return <div>Welcome to the Diskord</div> 
 }
