@@ -5,6 +5,7 @@ import { get } from "http";
 import { useCallback, useEffect, useState } from "react";
 import { User } from "stream-chat";
 import { LoadingIndicator } from "stream-chat-react";
+import MyChat from "./components/MyChat";
 
 type HomeState = {
   apiKey: string;
@@ -93,5 +94,5 @@ export default function Home() {
   if (!homeState) {
     return <LoadingIndicator />;
   }
-  return <div>Welcome to the Diskord</div> 
+  return <div><MyChat {...homeState} /></div> 
 }
