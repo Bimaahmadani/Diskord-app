@@ -19,6 +19,11 @@
   }
 }
 
+.layout{
+  display:grid;
+  grid-template-columns: 5rem auto 1fr;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
