@@ -21,7 +21,7 @@ export default function ServerList() {
         },
 
     ];
-    return <div className="bg-blue-500">
+    return <div className="bg-dark-gray h-full flex flex-col items-center gap-2">
         {servers.map(server => (
             <button 
             key={server.id} 
@@ -34,7 +34,7 @@ export default function ServerList() {
                 alt='Server Icon'
                 />
              ) :(
-                <span className="bg-gray-600 w-[50px] flex items-center justify-center text-sm rounded-full">
+                <span className="rounded-icon bg-gray-600 w-[50px] flex items-center justify-center text-sm">
                     {server.name.charAt(0)}
                 </span>
              )}
