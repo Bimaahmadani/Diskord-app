@@ -2,6 +2,7 @@ import { DiscordServer } from "@/models/DiscordServer";
 import {v4 as uuid} from 'uuid';
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/dist/client/link";
 
 
 export default function ServerList() {
@@ -24,7 +25,8 @@ export default function ServerList() {
         },
 
     ];
-    return <div className="bg-dark-gray h-full flex flex-col items-center gap-y-3">
+    return (
+    <div className="bg-dark-gray h-full flex flex-col items-center gap-y-3">
         {servers.map(server => (
             <button 
             key={server.id}
@@ -45,14 +47,23 @@ export default function ServerList() {
              )}
             </button>
             ))}
+            <Link
+            href={'/?createServer=true'}
+            className="flex items-center justify-center rounded-icon bg-white p-2 text-2xl font-light h-12 w-12
+             text-green-500 hover:bg-green-500 hover:text-white hover:rounded-xl transition-all duration-200"
+            >
+                <span className="inline-block">+</span>
+            </Link>
     </div>
-}
+    );
 
-function checkIfurl(path: string): Boolean {
-    try {
-        const _ = new URL(path);
-        return true;
-    } catch (_) {
-        return false;
+    function checkIfurl(path: string): Boolean {
+        try {
+            const _ = new URL(path);
+            return true;
+        } catch (_) {
+            return false;
+        }
     }
 }
+
