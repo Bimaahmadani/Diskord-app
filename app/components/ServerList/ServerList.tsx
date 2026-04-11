@@ -3,6 +3,7 @@ import {v4 as uuid} from 'uuid';
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/dist/client/link";
+import CreateServerForm from "./CreateServerForm";
 
 
 export default function ServerList() {
@@ -54,6 +55,7 @@ export default function ServerList() {
             >
                 <span className="inline-block">+</span>
             </Link>
+            <CreateServerForm></CreateServerForm>
     </div>
     );
 
