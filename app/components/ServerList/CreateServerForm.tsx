@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { CloseIcon } from "stream-chat-react"
 
 export default function CreateServerForm() {
     return (
@@ -7,7 +8,9 @@ export default function CreateServerForm() {
             <h2 className="text-3xl font-semibold text-gray-600">
                 Create a Server
             </h2>
-            <Link href='/'></Link>
+            <Link href='/'>
+                <CloseIcon />
+            </Link>
         </div>
     </dialog>
 )
