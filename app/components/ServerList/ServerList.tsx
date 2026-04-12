@@ -8,6 +8,8 @@ import CreateServerForm from "./CreateServerForm";
 
 export default function ServerList() {
     const [activeServer, setActiveServer] = useState<DiscordServer| undefined>();
+    const [openModal, setOpenModal] = useState(false);
+
     const servers: DiscordServer[] = [
         {
             id: '1',
@@ -48,14 +50,16 @@ export default function ServerList() {
              )}
             </button>
             ))}
-            <Link
-            href={'/?createServer=true'}
-            className="flex items-center justify-center rounded-icon bg-white p-2 text-2xl font-light h-12 w-12
-             text-green-500 hover:bg-green-500 hover:text-white hover:rounded-xl transition-all duration-200"
+            <button
+                onClick={() => setOpenModal(true)}
+                className="flex items-center justify-center rounded-icon bg-white p-2 text-2xl font-light h-12 w-12
+                text-green-500 hover:bg-green-500 hover:text-white hover:rounded-xl transition-all duration-200"
             >
-                <span className="inline-block">+</span>
-            </Link>
-            <CreateServerForm></CreateServerForm>
+                +
+            </button>
+
+            {/* MODAL */}
+            <CreateServerForm open={openModal} setOpen={setOpenModal} />
     </div>
     );
 
