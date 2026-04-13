@@ -3,16 +3,29 @@ import Link from "next/link"
 import { use, useEffect, useRef } from "react"
 import { JSX } from "react/jsx-dev-runtime"
 import { CloseIcon } from "stream-chat-react"
+import { UserObject } from "@/models/UserObject";
 
 interface Props {
     open: boolean;
     setOpen: (val: boolean) => void;
 }
 
+type FormState = {
+    serverName: string;
+    serverImage: string;
+    users: UserObject[]
+}
 export default function CreateServerForm({ open, setOpen }: Props): JSX.Element {
     const params = useSearchParams();
     const showCreateServerForm = params.get('createServer');
     const dialogRef = useRef<HTMLDialogElement>(null);
+
+
+    useEffect(() => {
+        if (showCreateServerForm==='true') {
+            setOpen(true);
+        }
+    }, [showCreateServerForm]);
 
     useEffect(() => {
     const dialog = dialogRef.current;
