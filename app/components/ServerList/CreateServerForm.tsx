@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/dist/client/components/navigation";
 import Link from "next/link"
-import { use, useEffect, useRef } from "react"
+import { use, useEffect, useRef, useState } from "react"
 import { JSX } from "react/jsx-dev-runtime"
 import { CloseIcon } from "stream-chat-react"
 import { UserObject } from "@/models/UserObject";
@@ -14,12 +14,22 @@ type FormState = {
     serverName: string;
     serverImage: string;
     users: UserObject[]
-}
+};
+
+
+
 export default function CreateServerForm({ open, setOpen }: Props): JSX.Element {
     const params = useSearchParams();
     const showCreateServerForm = params.get('createServer');
     const dialogRef = useRef<HTMLDialogElement>(null);
 
+    const initialState: FormState = {
+        serverName: '',
+        serverImage: '',
+        users: [],
+    };
+
+    const [formData, setFormData] = useState<FormState>(initialState);
 
     useEffect(() => {
         if (showCreateServerForm==='true') {
@@ -66,6 +76,13 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
                 <CloseIcon />
             </button>
         </div>
+        
+        <form method="dialog" className="flex flex-col space-y-2 px-6" action="">
+            <label className="labelTitle" htmlFor="serverName">
+                Server Name
+            </label>
+            <div className="flex items-center bg-gray-100"></div>
+        </form>
     </dialog>
 )
 }
