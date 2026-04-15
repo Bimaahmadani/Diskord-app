@@ -81,7 +81,19 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
             <label className="labelTitle" htmlFor="serverName">
                 Server Name
             </label>
-            <div className="flex items-center bg-gray-100"></div>
+            <div className="flex items-center bg-gray-100">
+                <span className="text-2xl p-2 text-gray-500">#</span>
+                <input
+                    type="text"
+                    id="serverName"
+                    name="serverName"
+                    value={formData.serverName}
+                    onChange={(e) => 
+                        setFormData({ ...formData, serverName: e.target.value })}
+                    required
+                />
+
+            </div>
         </form>
     </dialog>
 )

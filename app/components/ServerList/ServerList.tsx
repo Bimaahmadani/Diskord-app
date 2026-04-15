@@ -44,7 +44,7 @@ export default function ServerList() {
                 className="rounded-icon"
                 />
              ) :(
-                <span className="rounded-icon bg-gray-600 w-[50px] flex items-center justify-center text-sm">
+                <span className="rounded-icon bg-gray-600 w-12.5 flex items-center justify-center text-sm">
                     {server.name.charAt(0)}
                 </span>
              )}
