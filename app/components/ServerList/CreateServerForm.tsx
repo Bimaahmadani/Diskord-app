@@ -4,6 +4,7 @@ import { use, useCallback, useEffect, useRef, useState } from "react"
 import { JSX } from "react/jsx-dev-runtime"
 import { CloseIcon, useChat, useChatContext } from "stream-chat-react"
 import { UserObject } from "@/models/UserObject";
+import UserRow from "../UserRow";
 
 interface Props {
     open: boolean;
@@ -139,11 +140,25 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
 
             <div className="max-h-64 overflow-y-scroll">
                 {user.map((user) => (
-                    
+                    <UserRow key={user.id} user={user} userChanged={userChanged}/>
                 ))}
             </div>
         </form>
     </dialog>
-)
+);
+
+    function userChanged(user: UserObject, checked: boolean) {
+        if (checked) {
+            setFormData({
+                ...formData,
+                users: [...formData.users, user]
+            });
+            } else {
+                setFormData({
+                    ...formData,
+                    users: formData.users.filter((thisUser) => thisUser.id !== user.id)
+                });
+            }
+    }
 }
     
