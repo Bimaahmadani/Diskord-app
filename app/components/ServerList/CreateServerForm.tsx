@@ -138,7 +138,7 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
                 />
             </div>
 
-            <div className="max-h-64 overflow-y-scroll">
+            <div className="max-h-64 max-w-84 overflow-y-scroll">
                 {user.map((user) => (
                     <UserRow key={user.id} user={user} userChanged={userChanged}/>
                 ))}
