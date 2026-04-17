@@ -1,10 +1,12 @@
 import { useSearchParams } from "next/dist/client/components/navigation";
+import { useRouter } from 'next/navigation';
 import Link from "next/link"
 import { use, useCallback, useEffect, useRef, useState } from "react"
 import { JSX } from "react/jsx-dev-runtime"
 import { CloseIcon, useChat, useChatContext } from "stream-chat-react"
 import { UserObject } from "@/models/UserObject";
 import UserRow from "../UserRow";
+
 
 interface Props {
     open: boolean;
@@ -16,8 +18,6 @@ type FormState = {
     serverImage: string;
     users: UserObject[]
 };
-
-
 
 export default function CreateServerForm({ open, setOpen }: Props): JSX.Element {
     //check if we are shown
@@ -32,6 +32,8 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
         serverImage: '',
         users: [],
     };
+    
+    const router = useRouter();
 
     const [formData, setFormData] = useState<FormState>(initialState);
     const [user, setUser] = useState<UserObject []>([]);
@@ -137,15 +139,42 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
                     required
                 />
             </div>
-
+            <h2 className="mb-2 labelTitle">Add User</h2>
             <div className="max-h-64 max-w-84 overflow-y-scroll">
                 {user.map((user) => (
                     <UserRow key={user.id} user={user} userChanged={userChanged}/>
                 ))}
             </div>
         </form>
+        <div className="flex space-x-6 items-center justify-end p-6 bg-gray-200">
+            <Link href={'/'} className="font-semibold text-gray-500">
+                Cancel
+            </Link>
+            <button type="submit"
+            disabled={buttonDisabled()}
+            className={`bg-discord rounded py-2 px-4 text-white font-bold uppercase ${
+                buttonDisabled() ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            onClick={createClicked}>
+                Create Server
+            </button>
+        </div>
     </dialog>
 );
+
+    function buttonDisabled(): boolean {
+        return(
+            !formData.serverName ||
+            !formData.serverImage ||
+            formData.users.length <= 1
+        )
+
+    }
+
+    function createClicked(){
+        setFormData(initialState);
+        router.replace('/');
+    }
 
     function userChanged(user: UserObject, checked: boolean) {
         if (checked) {
