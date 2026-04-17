@@ -1,5 +1,4 @@
-import { useSearchParams } from "next/dist/client/components/navigation";
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from "next/dist/client/components/navigation";
 import Link from "next/link"
 import { use, useCallback, useEffect, useRef, useState } from "react"
 import { JSX } from "react/jsx-dev-runtime"
