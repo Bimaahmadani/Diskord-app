@@ -4,7 +4,7 @@ type IconProps = {
     className?: string;
 }
 
-export default function CloseIcon({ className ='h-5 w-5 text-gray-500' }: IconProps): JSX.Element {
+export function CloseIcon({ className ='h-6 w-7 text-gray-500' }: IconProps): JSX.Element {
     return (
         <svg 
         xmlns="http://www.w3.org/2000/svg" 

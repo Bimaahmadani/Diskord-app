@@ -11,7 +11,7 @@ export default function UserRow({
     userChanged: (user: UserObject, checked: boolean) => void
 }): JSX.Element {
     return(
-        <div className="grid grid-cols-5 items-center justify-start w-full my-2">
+        <div className="flex items-center justify-start w-full gap-x-3 my-2">
             <input
             id={user.id} 
             type="checkbox"
@@ -21,7 +21,7 @@ export default function UserRow({
                 userChanged(user, event.target.checked)
             }} 
             ></input>
-            <label className="w-full flex items-center space-x-3 col-span-4" htmlFor={user.id}>
+            <label className="w-full flex items-center space-x-3" htmlFor={user.id}>
                 {user.image &&(
                   <Image
                     src={user.image}
