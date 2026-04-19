@@ -5,6 +5,8 @@ import { JSX } from "react/jsx-dev-runtime"
 import { CloseIcon, useChat, useChatContext } from "stream-chat-react"
 import { UserObject } from "@/models/UserObject";
 import UserRow from "../UserRow";
+import { useDiscordContext } from "@/app/contexts/DiscordContext";
+import { create } from "domain";
 
 
 interface Props {
@@ -26,11 +28,14 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
 
     //Data
     const {client}= useChatContext();
+    const { createServer } = useDiscordContext();
     const initialState: FormState = {
         serverName: '',
         serverImage: '',
         users: [],
     };
+
+
     
     const router = useRouter();
 
@@ -171,6 +176,12 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
     }
 
     function createClicked(){
+        createServer(
+            client,
+            formData.serverName,
+            formData.serverImage,
+            formData.users.map((user) => user.id)
+        );
         setFormData(initialState);
         router.replace('/');
     }
