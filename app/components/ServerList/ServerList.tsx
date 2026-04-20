@@ -1,36 +1,73 @@
 import { DiscordServer } from "@/models/DiscordServer";
 import {v4 as uuid} from 'uuid';
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/dist/client/link";
 import CreateServerForm from "./CreateServerForm";
+import { useChatContext } from "stream-chat-react";
+import type { Channel } from "stream-chat";
 
 
 export default function ServerList() {
+    const{client}= useChatContext();
     const [activeServer, setActiveServer] = useState<DiscordServer| undefined>();
+    const [serverList, setServerList] = useState<DiscordServer[]>([]);
     const [openModal, setOpenModal] = useState(false);
 
-    const servers: DiscordServer[] = [
-        {
-            id: '1',
-            name: 'Test Server 1',
-            image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        },
-        {
-            id: '2',
-            name: 'Test Server 2',
-            image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTN8fHRlY2hub2xvZ3l8ZW58MHx8MHx8fDA%3D'
-        },
-        {
-            id: '3',
-            name: 'Test Server 3',
-            image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlY2hub2xvZ3l8ZW58MHx8MHx8fDA%3D'
-        },
+    // const servers: DiscordServer[] = [
+    //     {
+    //         id: '1',
+    //         name: 'Test Server 1',
+    //         image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    //     },
+    //     {
+    //         id: '2',
+    //         name: 'Test Server 2',
+    //         image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTN8fHRlY2hub2xvZ3l8ZW58MHx8MHx8fDA%3D'
+    //     },
+    //     {
+    //         id: '3',
+    //         name: 'Test Server 3',
+    //         image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlY2hub2xvZ3l8ZW58MHx8MHx8fDA%3D'
+    //     },
 
-    ];
+    // ];
+
+    const loadServerList = useCallback( async (): Promise<void> => {
+        const channels = await client.queryChannels({
+            type: 'messaging', 
+            members: {$in: [client.userID as string]},
+        });
+        const serverSet: Set<DiscordServer> = new Set(
+            channels.map((channel: Channel) => {
+                const data = channel.data as any;
+
+                return {
+                        id: data?.serverId,
+                        name: (data?.server as string) ?? 'Unknown',
+                        image: data?.image,
+                };
+            })
+            .filter((server: DiscordServer) => server.name !== 'Unknown')
+            .filter((server: DiscordServer, index, self) => 
+                index === 
+                self.findIndex((serverObject) => serverObject.name === server.name)
+            )
+        );
+        const serverArray = Array.from(serverSet.values());
+        setServerList(serverArray);
+        if(serverArray.length > 0){
+            setActiveServer(serverArray[0]);
+        }
+
+    }, [client]);
+
+    useEffect(() => {
+        loadServerList();
+    }, [loadServerList]);
     return (
     <div className="bg-dark-gray h-full flex flex-col items-center gap-y-3">
-        {servers.map(server => (
+        {serverList.map(server => (
             <button 
             key={server.id}
             className={`sidebar-icon ${server.id === activeServer?.id ? 'selected-icon' : ''}`} 
