@@ -1,15 +1,15 @@
 import { DiscordServer } from "@/models/DiscordServer";
 import {v4 as uuid} from 'uuid';
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { JSX, useCallback, useEffect, useState } from "react";
 import Link from "next/dist/client/link";
 import CreateServerForm from "./CreateServerForm";
 import { useChatContext } from "stream-chat-react";
 import type { Channel } from "stream-chat";
 
 
-export default function ServerList() {
-    const{client}= useChatContext();
+export default function ServerList(): JSX.Element {
+    const {client}= useChatContext();
     const [activeServer, setActiveServer] = useState<DiscordServer| undefined>();
     const [serverList, setServerList] = useState<DiscordServer[]>([]);
     const [openModal, setOpenModal] = useState(false);
@@ -39,13 +39,14 @@ export default function ServerList() {
             members: {$in: [client.userID as string]},
         });
         const serverSet: Set<DiscordServer> = new Set(
-            channels.map((channel: Channel) => {
-                const data = channel.data as any;
+            channels
+                .map((channel: Channel) => {
+                // const data = channel.data as any;
 
                 return {
-                        id: data?.serverId,
-                        name: (data?.server as string) ?? 'Unknown',
-                        image: data?.image,
+                        id: channel.data?.data?.id,
+                        name: (channel.data?.data?.server as string) ?? 'Unknown',
+                        image: channel.data?.data?.image,
                 };
             })
             .filter((server: DiscordServer) => server.name !== 'Unknown')
@@ -100,13 +101,17 @@ export default function ServerList() {
     </div>
     );
 
-    function checkIfurl(path: string): Boolean {
-        try {
-            const _ = new URL(path);
-            return true;
-        } catch (_) {
-            return false;
-        }
-    }
+    // function checkIfurl(path: string): Boolean {
+    //     try {
+    //         const _ = new URL(path);
+    //         return true;
+    //     } catch (_) {
+    //         return false;
+    //     }
+    // }
+
+    function checkIfurl(path: string): boolean {
+    return !!path;
+}
 }
 

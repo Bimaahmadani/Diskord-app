@@ -25,6 +25,7 @@ declare module "stream-chat" {
     serverId?: string;
     server?: string;
     category?: string;
+    data?:object
   }
 }
 
@@ -45,12 +46,14 @@ export const DiscordContextProvider: any = ({
         ) =>{
             const serverId = uuid();
             const messagingChannel = client.channel("messaging", uuid(), {
-                name: "welcome",
+                name: "Welcome",
                 members: userIds,
-                image: imageUrl,
-                serverId: serverId,
-                server: name,
-                category: "Text Channels",
+                data: {
+                    image: imageUrl,
+                    serverId: serverId,
+                    server: name,
+                    category:'Text Channels',
+                }
             });
 
             try {
