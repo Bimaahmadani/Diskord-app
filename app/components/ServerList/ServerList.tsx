@@ -6,11 +6,14 @@ import Link from "next/dist/client/link";
 import CreateServerForm from "./CreateServerForm";
 import { useChatContext } from "stream-chat-react";
 import type { Channel } from "stream-chat";
+import { useDiscordContext } from "@/app/contexts/DiscordContext";
 
 
 export default function ServerList(): JSX.Element {
     const {client}= useChatContext();
-    const [activeServer, setActiveServer] = useState<DiscordServer| undefined>();
+    const{server: activeServer, changeServer} = useDiscordContext();
+
+    // const [activeServer, setActiveServer] = useState<DiscordServer| undefined>();
     const [serverList, setServerList] = useState<DiscordServer[]>([]);
     const [openModal, setOpenModal] = useState(false);
 
@@ -58,10 +61,10 @@ export default function ServerList(): JSX.Element {
         const serverArray = Array.from(serverSet.values());
         setServerList(serverArray);
         if(serverArray.length > 0){
-            setActiveServer(serverArray[0]);
+            changeServer(serverArray[0], client);
         }
 
-    }, [client]);
+    }, [client, changeServer]);
 
     useEffect(() => {
         loadServerList();
@@ -72,7 +75,7 @@ export default function ServerList(): JSX.Element {
             <button 
             key={server.id}
             className={`sidebar-icon ${server.id === activeServer?.id ? 'selected-icon' : ''}`} 
-            onClick={() => setActiveServer(server)}>
+            onClick={() => changeServer(server, client)}>
              {server.image && checkIfurl(server.image) ? (
                 <Image
                 src={server.image}
