@@ -20,12 +20,12 @@ const initialValue: DiscordState = {
 declare module "stream-chat" {
   // TypeScript akan menggabungkan CustomChannelData ini dengan internal SDK
   interface CustomChannelData extends DefaultChannelData {
-    name?: string;
-    image?: string;
-    serverId?: string;
-    server?: string;
-    category?: string;
-    data?:object
+    name?: any;
+    image?: any;
+    serverId?: any;
+    server?: any;
+    category?: any;
+    data?:any;
   }
 }
 

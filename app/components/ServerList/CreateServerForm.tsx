@@ -175,16 +175,24 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
 
     }
 
-    function createClicked(){
-        createServer(
-            client,
-            formData.serverName,
-            formData.serverImage,
-            formData.users.map((user) => user.id)
-        );
-        setFormData(initialState);
-        router.replace('/');
+  function createClicked(){
+    const memberIds = formData.users.map((user) => user.id);
+    
+    // Pastikan current user otomatis masuk ke dalam member channel
+    if (client.userID && !memberIds.includes(client.userID)) {
+        memberIds.push(client.userID);
     }
+
+    createServer(
+        client,
+        formData.serverName,
+        formData.serverImage,
+        memberIds
+    );
+    
+    setFormData(initialState);
+    router.replace('/');
+}
 
     function userChanged(user: UserObject, checked: boolean) {
         if (checked) {

@@ -41,12 +41,12 @@ export default function ServerList(): JSX.Element {
         const serverSet: Set<DiscordServer> = new Set(
             channels
                 .map((channel: Channel) => {
-                // const data = channel.data as any;
+
 
                 return {
-                        id: channel.data?.data?.id,
+                        id: channel.data?.data?.serverId,
                         name: (channel.data?.data?.server as string) ?? 'Unknown',
-                        image: channel.data?.data?.image,
+                        image: channel.data?.data?.image,      
                 };
             })
             .filter((server: DiscordServer) => server.name !== 'Unknown')
@@ -67,7 +67,7 @@ export default function ServerList(): JSX.Element {
         loadServerList();
     }, [loadServerList]);
     return (
-    <div className="bg-dark-gray h-full flex flex-col items-center gap-y-3">
+    <div className="bg-dark-gray h-full flex flex-col items-center py-3 gap-y-3">
         {serverList.map(server => (
             <button 
             key={server.id}
