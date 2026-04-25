@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { JSX } from "react";
+import { ChevronDown, CloseIcon } from "../../Icons";
 
 export default function ChannelListTopBar({
     serverName,
@@ -17,7 +18,17 @@ export default function ChannelListTopBar({
                 onClick={() => setMenuOpen((currentValue)=> !currentValue)}
             >
                 <h2 className="text-medium font-semibold text-gray-700">{serverName}</h2>
+                {menuOpen && <CloseIcon/>}
+                {!menuOpen && <ChevronDown/>}
             </button>
+
+            {menuOpen && (
+                <div className="absolute w-full p-2 z-10">
+                    <div className="w-full bg-white p-2 shadow-lg rounded-md">
+                        <h2 className="font-semibold">Menu</h2>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
