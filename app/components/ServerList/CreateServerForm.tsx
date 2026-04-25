@@ -1,8 +1,9 @@
 import { useSearchParams, useRouter } from "next/dist/client/components/navigation";
 import Link from "next/link"
+import { CloseIcon } from "../Icons";
 import { use, useCallback, useEffect, useRef, useState } from "react"
 import { JSX } from "react/jsx-dev-runtime"
-import { CloseIcon, useChat, useChatContext } from "stream-chat-react"
+import { useChat, useChatContext } from "stream-chat-react"
 import { UserObject } from "@/models/UserObject";
 import UserRow from "../UserRow";
 import { useDiscordContext } from "@/app/contexts/DiscordContext";
