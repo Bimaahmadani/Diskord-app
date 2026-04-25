@@ -102,3 +102,16 @@ input[type="checkbox"]{
 dialog{
   width: clamp(30rem, 50%, 50rem);
 }
+
+.discord-icon{
+  @apply bg-white p-3 w-full h-full;
+  background: url('../assets/discord-black.svg') no-repeat center center, white;
+  background-origin: content-box;
+}
+
+.discord-icon:hover{
+  background: url('../assets/discord-white.svg') no-repeat center center,
+    var(--color-discord);
+    --offset:1.5rem;
+    background-origin: content-box;
+}

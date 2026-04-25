@@ -70,7 +70,7 @@ export default function ServerList(): JSX.Element {
         loadServerList();
     }, [loadServerList]);
     return (
-    <div className="bg-dark-gray h-full flex flex-col items-center py-3 gap-y-3">
+    <div className="bg-dark-gray h-full flex flex-col items-center gap-y-3">
         <button
             className={`block p-3 aspect-square sidebar-icon border-b-2 -border-b-gray-300 ${
                 activeServer === undefined ? 'selected-icon' : ''           
