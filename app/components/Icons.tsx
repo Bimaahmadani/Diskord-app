@@ -77,7 +77,7 @@ export function ChevronDown({
         strokeWidth={1.5} 
         stroke="currentColor" 
         className={className}>
-        <path strokeLinecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
         </svg>
     );
 };

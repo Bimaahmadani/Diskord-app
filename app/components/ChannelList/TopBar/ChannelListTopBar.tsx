@@ -2,6 +2,7 @@ import { useState } from "react";
 import { JSX } from "react";
 import { ChevronDown, CloseIcon } from "../../Icons";
 import { menuItems } from "./menuItem";
+import ChannelListMenuRow from "./ChannelListMenuRow";
 
 export default function ChannelListTopBar({
     serverName,
@@ -33,7 +34,7 @@ export default function ChannelListTopBar({
                             className="w-full"
                             onClick={() => setMenuOpen(false)}
                             >
-
+                                <ChannelListMenuRow {...option}/>
                             </button>
                         )
                     
