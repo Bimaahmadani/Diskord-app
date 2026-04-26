@@ -13,6 +13,7 @@
   --color-dark-gray: #dfe1e4;
   --color-medium-gray: #f0f1f3;
   --color-discord: #7289da;
+  --color-dark-discord: #4752c4
 }
 
 @media (prefers-color-scheme: dark) {

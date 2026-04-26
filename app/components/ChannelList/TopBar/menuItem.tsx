@@ -24,5 +24,27 @@ export type ListRowElement = {
 };
 
 export const menuItems: ListRowElement[] =[
-    
+    {name: 'ServerBoost', icon: <Boost/>, bottomBorder: true},
+    {
+        name: 'Invite People',
+        icon: <PersonAdd/>,
+        bottomBorder: false,
+        purple: true
+    },
+    {name: 'Server Settings', icon: <Gear/>, bottomBorder: false},
+    {name: 'Create Channel', icon: <PlusCircle/>, bottomBorder: false},
+    {name: 'Create Category', icon: <FolderPlus/>, bottomBorder: false},
+    {name: 'App Directory', icon: <FaceSmile/>, bottomBorder: false},
+    {name: 'Notification Settings', icon: <Bell/>, bottomBorder: false},
+    {name: 'Privacy Settings', icon: <Shield/>, bottomBorder: false},
+    {name: 'Edit Server Profile', icon: <Pen/>, bottomBorder: false},
+    {name: 'Hide Muted Channels', icon: <SpeakerMuted/>, bottomBorder: false},
+
+    {
+        name: 'Leave Server',
+        icon: <LeaveServer />,
+        bottomBorder: false,
+        red: true,
+    }
+
 ];
