@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 
 type DiscordState= {
     server?: DiscordServer;
-    channelsByCategories: Map<string, Array<Channel<DefaultStreamChatGenerics>>>
+    channelsByCategories: Map<string, Array<Channel>>
     changeServer:(server: DiscordServer | undefined, client: StreamChat) => void;
     createServer:(
         client: StreamChat,
@@ -27,7 +27,7 @@ const initialValue: DiscordState = {
 
 declare module "stream-chat" {
   // TypeScript akan menggabungkan CustomChannelData ini dengan internal SDK
-  interface CustomChannelData extends DefaultChannelData {
+  interface CustomChannelData extends DefaultChannelData  {
     name?: any;
     image?: any;
     serverId?: any;
@@ -59,7 +59,7 @@ export const DiscordContextProvider: any = ({
             const channels = await client.queryChannels(filters);
             const channelsByCategories = new Map<
                 string,
-                Array<Channel<DefaultStreamChatGenerics>>
+                Array<Channel>
             >();
 
             if(server){
