@@ -2,6 +2,7 @@ import { useDiscordContext } from "@/app/contexts/DiscordContext";
 import { JSX } from "react";
 import { ChannelListMessengerProps } from "stream-chat-react";
 import ChannelListTopBar from "./TopBar/ChannelListTopBar";
+import CategoryItem from "./CategoryItem";
 
 export default function CustomChannelList(): JSX.Element {
     const {server, channelsByCategories} = useDiscordContext();
@@ -11,7 +12,14 @@ export default function CustomChannelList(): JSX.Element {
         <ChannelListTopBar serverName={server?.name || 'Find or start a conversation'}/>
 
         <div className="w-full">
-            {Array.from(channelsByCategories.keys()).map((category,index)=>)}
+            {Array.from(channelsByCategories.keys()).map((category,index)=>(
+                <CategoryItem
+                key={`${category}-${index}`}
+                category={category}
+                serverName={server?.name || 'Find or start a conversation'}
+                channels={channelsByCategories.get(category) || []}
+                />
+            ))}
         </div>
 
     </div>

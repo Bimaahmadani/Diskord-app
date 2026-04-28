@@ -2,6 +2,7 @@ import { JSX, useState } from "react";
 import { Channel } from "stream-chat";
 import { ChevronDown, PlusIcon } from "../Icons";
 import Link from "next/link";
+import CustomChannelPreview from "./CustomChannelPreview";
 
 type CategoryItemProps={
     category : string;
@@ -41,7 +42,13 @@ export default function CategoryItem({
             {isOpen &&(
                 <div>
                     {channels.map((channel)=>{
-                        
+                        return(
+                            <CustomChannelPreview
+                            key={channel.id}
+                            channel={channel}
+                            className="w-full"
+                            />
+                        )
                     })}
                 </div>
             )}
