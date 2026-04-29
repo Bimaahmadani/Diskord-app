@@ -85,7 +85,7 @@ export const DiscordContextProvider: any = ({
                     )
                 }
             } else{
-                channelsByCategories.set('Find or start a conversation', channels);
+                channelsByCategories.set('Direct Messages', channels);
             }
             setMyState((myState)=>{
                 return {
