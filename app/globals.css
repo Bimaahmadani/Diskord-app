@@ -12,6 +12,8 @@
   --font-mono: var(--font-geist-mono);
   --color-dark-gray: #dfe1e4;
   --color-medium-gray: #f0f1f3;
+  --color-light-gray: #e8eaec;
+  --color-hover-gray:#cdcfd3;
   --color-discord: #7289da;
   --color-dark-discord: #4752c4
 }
@@ -125,4 +127,12 @@ dialog{
 .channel-container::before{
   @apply block absolute h-2 w-3 -left-4 bg-gray-700 rounded-xl;
   content: '';
+}
+
+.online-icon::after{
+  @apply block absolute h-4 w-4 bg-green-600 bottom-0 right-0 rounded-full border-2 border-gray-200
+}
+
+.inactive-icon::after{
+  @apply block absolute h-full w-0.5 bg-red-400 rotate-45 rounded-xl m-2
 }
