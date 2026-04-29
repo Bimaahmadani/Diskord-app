@@ -4,6 +4,7 @@ import { Mic, Speaker, LeaveServer, Gear } from "../../Icons";
 import { useState } from "react";
 import { useClerk } from "@clerk/nextjs";
 import Image from "next/image";
+import ChannelListMenuRow from "../TopBar/ChannelListMenuRow";
 
 export default function ChannelListBottomBar():JSX.Element{
     const {client} = useChatContext();
@@ -65,6 +66,19 @@ export default function ChannelListBottomBar():JSX.Element{
             >
                 <Gear className="w-full h-full"/>
             </button>
+            {menuOpen&&(
+                <button
+                    className="absolute -top-12 -left-1 w-52 p-2 bg-white rounded-md shadow-md"
+                    onClick={() => signOut()}
+                >
+                    <ChannelListMenuRow
+                    name="Sign out"
+                    icon={<LeaveServer/>}
+                    bottomBorder={false}
+                    red
+                    />
+                </button>
+            )}
         </div>
     );
 }
