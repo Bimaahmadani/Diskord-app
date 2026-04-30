@@ -130,22 +130,22 @@ export function CreateChannelForm():JSX.Element {
     }
 
       function createClicked(){
-    // const memberIds = formData.users.map((user) => user.id);
-    
-    // // Pastikan current user otomatis masuk ke dalam member channel
-    // if (client.userID && !memberIds.includes(client.userID)) {
-    //     memberIds.push(client.userID);
-    // }
+        // const memberIds = formData.users.map((user) => user.id);
+        
+        // // Pastikan current user otomatis masuk ke dalam member channel
+        // if (client.userID && !memberIds.includes(client.userID)) {
+        //     memberIds.push(client.userID);
+        // }
 
-    // createServer(
-    //     client,
-    //     formData.serverName,
-    //     formData.serverImage,
-    //     memberIds
-    // );
+        // createServer(
+        //     client,
+        //     formData.serverName,
+        //     formData.serverImage,
+        //     memberIds
+        // );
     
-    setFormData(initialState);
-    router.replace('/');
+        setFormData(initialState);
+        router.replace('/');
 }
 
 
