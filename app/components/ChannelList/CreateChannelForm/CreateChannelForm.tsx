@@ -5,6 +5,7 @@ import {  useChatContext } from "stream-chat-react";
 import { CloseIcon } from "../../Icons";
 import Link from "next/link";
 import UserRow from "../../UserRow";
+import { useDiscordContext } from "@/app/contexts/DiscordContext";
 
 
 type FormState = {
@@ -22,6 +23,7 @@ export function CreateChannelForm():JSX.Element {
     const router = useRouter();
 
     const {client}= useChatContext();
+    const { createChannel } = useDiscordContext();
     const initialState: FormState = {
         channelName: '',
         category: category ?? '',
@@ -130,19 +132,19 @@ export function CreateChannelForm():JSX.Element {
     }
 
       function createClicked(){
-        // const memberIds = formData.users.map((user) => user.id);
+        const memberIds = formData.users.map((user) => user.id);
         
-        // // Pastikan current user otomatis masuk ke dalam member channel
-        // if (client.userID && !memberIds.includes(client.userID)) {
-        //     memberIds.push(client.userID);
-        // }
+        // Pastikan current user otomatis masuk ke dalam member channel
+        if (client.userID && !memberIds.includes(client.userID)) {
+            memberIds.push(client.userID);
+        }
 
-        // createServer(
-        //     client,
-        //     formData.serverName,
-        //     formData.serverImage,
-        //     memberIds
-        // );
+        createChannel(
+            client,
+            formData.channelName,
+            formData.category,
+            memberIds
+        );
     
         setFormData(initialState);
         router.replace('/');
