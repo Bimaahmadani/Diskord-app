@@ -4,6 +4,7 @@ import { ChannelListMessengerProps } from "stream-chat-react";
 import ChannelListTopBar from "./TopBar/ChannelListTopBar";
 import CategoryItem from "./CategoryItem";
 import ChannelListBottomBar from "./BottomBar/ChannelListBottomBar";
+import { CreateChannelForm } from "./CreateChannelForm/CreateChannelForm";
 
 export default function CustomChannelList(): JSX.Element {
     const {server, channelsByCategories} = useDiscordContext();
@@ -22,6 +23,8 @@ export default function CustomChannelList(): JSX.Element {
                 />
             ))}
         </div>
+
+        <CreateChannelForm/>
         <ChannelListBottomBar/>
     </div>
     
