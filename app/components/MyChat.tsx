@@ -13,6 +13,7 @@ import {
  import 'stream-chat-react/css/v2/index.css';
 import ServerList from "./ServerList/ServerList";
 import CustomChannelList from "./ChannelList/CustomChannelList";
+import CustomDateSeparator from "./MessageList/CustomDateSeparator/CustomDateSeparator";
 
  export default function MyChat({ 
     apiKey, 
@@ -36,7 +37,9 @@ import CustomChannelList from "./ChannelList/CustomChannelList";
             <section className="flex h-screen w-screen layout">
             <ServerList/>
             <ChannelList List={CustomChannelList} />
-            <Channel>
+            <Channel
+                DateSeparator={CustomDateSeparator}
+            >
                 <Window>
                     <MessageList />
                     <MessageInput />

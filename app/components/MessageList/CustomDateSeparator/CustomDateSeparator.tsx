@@ -12,7 +12,7 @@ export default function CustomDateSeparator(
     }
 
     return(
-        <div className="border-b-2 relative flex items-center justify-center my-6">
+        <div className="border-b-2 relative flex items-center justify-center my-6 border-gray-400">
             <span className="absolute left-auto right-auto text-xs font-semibold text-gray-500 bg-white px-2">
                 {formatDate(date)}
             </span>
