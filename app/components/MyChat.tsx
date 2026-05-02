@@ -15,6 +15,7 @@ import ServerList from "./ServerList/ServerList";
 import CustomChannelList from "./ChannelList/CustomChannelList";
 import CustomDateSeparator from "./MessageList/CustomDateSeparator/CustomDateSeparator";
 import CustomChannelHeader from "./ChannelList/CustomChannelHeader/CustomChannelHeader";
+import CustomMessage from "./MessageList/CustomMessage/CustomMessage";
 
  export default function MyChat({ 
     apiKey, 
@@ -41,6 +42,7 @@ import CustomChannelHeader from "./ChannelList/CustomChannelHeader/CustomChannel
             <Channel
                 DateSeparator={CustomDateSeparator} 
                 HeaderComponent={CustomChannelHeader}
+                Message={CustomMessage}
             >
                 <Window>
                     <MessageList />

@@ -20,8 +20,25 @@ export default function CustomMessage(): JSX.Element {
                     <span className="'font-semibold text-sm text-black">
                         {message.user?.name}
                     </span>
+                    {message.updated_at &&(
+                        <span className="text-xs text-gray-600">
+                            {formatDate(message.updated_at)}
+                        </span>
+                    )}
                 </div>
+                <p className="text-sm text-gray-700">
+                    {message.text}
+                </p>
             </div>
         </div>
     )
+
+    function formatDate(date: Date |string): string {
+        if (typeof date === 'string') {
+            return date;
+        }
+        return `${date.toLocaleDateString('en-US', {
+            dateStyle: 'medium'
+        })}`;
+    }
 }
