@@ -11,13 +11,13 @@ export default function MessageOptions({
         <div className="absolute flex items-center -top-4 right-2 rounded-md bg-gray-50 border-2 hover:border-gray-200">
             <button className="p-1 transition-colors duration-200 ease-in-out hover:bg-gray-200"
                onClick={()=> showEmojiReactions((currentValue)=>!currentValue)}>
-               <Emoji className="w-6 h-6"/>
+               <Emoji className="w-5 h-5"/>
             </button> 
             <button className="p-1 transition-colors duration-200 ease-in-out hover:bg-gray-200">
-               <ArrowUturnLeft className="w-6 h-6"/>
+               <ArrowUturnLeft className="w-5 h-5"/>
             </button> 
             <button className="p-1 transition-colors duration-200 ease-in-out hover:bg-gray-200">
-               <Thread className="w-6 h-6"/>
+               <Thread className="w-5 h-5"/>
             </button> 
         </div>
     )
