@@ -40,10 +40,10 @@ export default function CustomMessage(): JSX.Element {
                         </span>
                     )}
                 </div>
-                <p className="text-sm text-gray-700">
+                <div className="text-sm text-gray-700">
                     {message.text}
                     <ReactionsList/>
-                </p>
+                </div>
             </div>
         </div>
     )
