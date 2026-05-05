@@ -15,7 +15,8 @@
   --color-light-gray: #e8eaec;
   --color-hover-gray:#cdcfd3;
   --color-discord: #7289da;
-  --color-dark-discord: #4752c4
+  --color-dark-discord: #4752c4;
+  --color-composer-gray: hsl(210 calc(1 * 11.1%) 92.9% / 1);
 }
 
 @media (prefers-color-scheme: dark) {
