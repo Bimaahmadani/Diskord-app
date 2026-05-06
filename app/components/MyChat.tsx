@@ -17,6 +17,7 @@ import CustomDateSeparator from "./MessageList/CustomDateSeparator/CustomDateSep
 import CustomChannelHeader from "./ChannelList/CustomChannelHeader/CustomChannelHeader";
 import CustomMessage from "./MessageList/CustomMessage/CustomMessage";
 import { customReactionOptions } from "./MessageList/CustomMessage/customMessageReactions";
+import MessageComposer from "./MessageList/MessageComposer/MessageComposer";
 
  export default function MyChat({ 
     apiKey, 
@@ -45,6 +46,7 @@ import { customReactionOptions } from "./MessageList/CustomMessage/customMessage
                 HeaderComponent={CustomChannelHeader}
                 Message={CustomMessage}
                 reactionOptions={customReactionOptions}
+                Input={MessageComposer}
             >
                 <Window>
                     <MessageList />

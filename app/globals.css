@@ -17,6 +17,7 @@
   --color-discord: #7289da;
   --color-dark-discord: #4752c4;
   --color-composer-gray: hsl(210 calc(1 * 11.1%) 92.9% / 1);
+  --color-gray-normal: #313338;
 }
 
 @media (prefers-color-scheme: dark) {
