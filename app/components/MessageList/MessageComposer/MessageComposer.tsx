@@ -1,13 +1,19 @@
 import { JSX, useState } from "react";
 import { SendButton, useChatContext } from "stream-chat-react";
-import { Emoji, GIF, PlusCircle, Present } from "../../Icons";
+import { GIF, PlusCircle, Present } from "../../Icons";
 import { plusItems } from "./plusItem";
 import ChannelListMenuRow from "../../ChannelList/TopBar/ChannelListMenuRow";
+import CustomEmojiPicker from "./CustomEmojiPicker";
 
 export default function MessageComposer(): JSX.Element {
     const [plusMenuOpen, setPlusMenuOpen] = useState(false);
     const {channel}= useChatContext();
     const [message, setMessage]= useState('');
+
+    // Fungsi penangkap emoji dari CustomEmojiPicker
+    const handleEmojiSelect = (emojiChar: string) => {
+        setMessage((prevMessage) => prevMessage + emojiChar);
+    };
 
     return(
         <div className="flex m-6 px-4 py-1 bg-composer-gray items-center justify-center space-x-4 rounded-md text-gray-600 relative">
@@ -38,7 +44,7 @@ export default function MessageComposer(): JSX.Element {
             />
             <Present className="w-8 h-8 hover:text-gray-800"/>
             <GIF className="w-8 h-8 hover:text-gray-800"/>
-            <Emoji className="w-8 h-8 hover:text-gray-800"/>
+            <CustomEmojiPicker onEmojiSelect={handleEmojiSelect} />
             <SendButton
                 sendMessage={()=>{
                     channel?.sendMessage({text: message});

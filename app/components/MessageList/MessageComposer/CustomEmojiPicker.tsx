@@ -34,7 +34,7 @@ export default function CustomEmojiPicker({ onEmojiSelect }: CustomEmojiPickerPr
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center justify-center outline-none"
             >
-                <Emoji className="w-8 h-8 hover:text-gray-800" />
+                <Emoji className="w-6 h-6 hover:text-gray-800" />
             </button>
             
             {/* Kotak Picker */}
