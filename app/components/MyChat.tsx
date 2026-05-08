@@ -1,4 +1,5 @@
 import { useClient } from "@/hooks/useClient";
+import { useVideoClient } from "@/hooks/useVideoClient";
 import { User } from "stream-chat";
 import { 
     Chat, 
@@ -18,6 +19,7 @@ import CustomChannelHeader from "./ChannelList/CustomChannelHeader/CustomChannel
 import CustomMessage from "./MessageList/CustomMessage/CustomMessage";
 import { customReactionOptions } from "./MessageList/CustomMessage/customMessageReactions";
 import MessageComposer from "./MessageList/MessageComposer/MessageComposer";
+import { StreamVideo } from "@stream-io/video-react-sdk";
 
  export default function MyChat({ 
     apiKey, 
@@ -33,10 +35,23 @@ import MessageComposer from "./MessageList/MessageComposer/MessageComposer";
         user, 
         tokenOrProvider: token,
     });
+
+    const videoClient = useVideoClient({
+        apiKey,
+        user,
+        tokenOrProvider: token,
+    });
+
     if (!chatClient) {
         return <div>Error, please try again later.</div>;
     }
+
+    if (!videoClient) {
+        return <div>Video Error, please try again later.</div>;
+    }
+
     return (
+        <StreamVideo client={videoClient}>
         <Chat client={chatClient} theme='str-chat__theme--light'>
             <section className="flex h-screen w-screen layout">
             <ServerList/>
@@ -55,5 +70,6 @@ import MessageComposer from "./MessageList/MessageComposer/MessageComposer";
             </Channel>
             </section>
         </Chat>
+        </StreamVideo>
     );
  }
