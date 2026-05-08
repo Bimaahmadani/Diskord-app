@@ -62,7 +62,7 @@ export default function MessageComposer(): JSX.Element {
            <button
                 onClick={handleSend}
                 disabled={message.trim() === ''}
-                className={`font-bold uppercase text-sm p-2 transition-all duration-200 ${
+                className={`transition-all duration-200 ${
                     message.trim() === '' 
                     ? 'text-gray-400 cursor-not-allowed opacity-50' 
                     : 'text-gray-600 hover:text-gray-800 cursor-pointer'
