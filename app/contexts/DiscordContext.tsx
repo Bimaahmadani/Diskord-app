@@ -1,5 +1,6 @@
 'use client';
 import { DiscordServer } from "@/models/DiscordServer";
+import { MemberRequest, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { channel } from "diagnostics_channel";
 import { createContext, use, useCallback, useContext, useState } from "react";
 import { Channel, StreamChat, ChannelFilters } from "stream-chat";
@@ -12,6 +13,7 @@ type DiscordState= {
     changeServer:(server: DiscordServer | undefined, client: StreamChat) => void;
     createServer:(
         client: StreamChat,
+        videoClient: StreamVideoClient,
         name: string,
         imageUrl: string,
         userIds: string[]
@@ -22,6 +24,12 @@ type DiscordState= {
         category: string,
         userIds: string[]
     )=> void;
+    createCall:(
+        client: StreamVideoClient,
+        server: DiscordServer,
+        channelName: string,
+        userids: string[]
+    )=> void;
 };
 
 const initialValue: DiscordState = {
@@ -30,6 +38,7 @@ const initialValue: DiscordState = {
     createServer: () => {},
     changeServer: () => {},
     createChannel: () => {},
+    createCall: async() => {},
 };
 
 declare module "stream-chat" {
@@ -105,9 +114,45 @@ export const DiscordContextProvider: any = ({
         [setMyState]
     );
 
+    const createCall = useCallback (
+        async (
+            client: StreamVideoClient,
+            server: DiscordServer,
+            channelName: string,
+            userIds: string[]
+        )=>{
+            const callId= uuid();
+            const audioCall = client.call('default', callId);
+            const audioChannelMembers: MemberRequest[] = userIds.map((userId)=>{
+                return{
+                    user_id: userId,
+                };
+            });
+            try{
+                const createAudioCall = await audioCall.create({
+                    data: {
+                        custom:{
+                            serverId: server?.id,
+                            serverName: server?.name,
+                            callName: channelName,
+                        },
+                        members: audioChannelMembers,
+                    },    
+                });
+                console.log(
+                    `[DiscordContext - createCall] Call created with ID: ${createAudioCall.call.id}`,
+                )
+            } catch (err){
+                console.log(err)
+            }
+        },  
+        []
+    )
+
     const createServer = useCallback(
         async (
             client: StreamChat,
+            videoClient: StreamVideoClient,
             name: string,
             imageUrl: string,
             userIds: string[]
@@ -127,11 +172,19 @@ export const DiscordContextProvider: any = ({
             try {
                 const response = await messagingChannel.create();
                 console.log("[DiscordContext - createServer] Response:", response);
+                if(myState.server){
+                    await createCall(
+                        videoClient,
+                        myState.server,
+                        'General Voice Channel',
+                        userIds
+                    )
+                }
             } catch (err) {
                 console.error(err);
             }
         },
-        []
+        [createCall, myState.server]
     );
 
     const createChannel = useCallback(
@@ -167,6 +220,7 @@ export const DiscordContextProvider: any = ({
         changeServer: changeServer,
         createServer: createServer,
         createChannel: createChannel,
+        createCall: createCall,
     };
 
     return (
