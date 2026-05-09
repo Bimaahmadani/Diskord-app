@@ -8,6 +8,7 @@ import { UserObject } from "@/models/UserObject";
 import UserRow from "../UserRow";
 import { useDiscordContext } from "@/app/contexts/DiscordContext";
 import { create } from "domain";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 
 
 interface Props {
@@ -29,6 +30,7 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
 
     //Data
     const {client}= useChatContext();
+    const videoClient = useStreamVideoClient();
     const { createServer } = useDiscordContext();
     const initialState: FormState = {
         serverName: '',
@@ -184,8 +186,14 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
         memberIds.push(client.userID);
     }
 
+    if (!videoClient){
+        console.log('[CreateServerForm] Video client is not available');
+        return;
+    }
+
     createServer(
         client,
+        videoClient,
         formData.serverName,
         formData.serverImage,
         memberIds
