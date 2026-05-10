@@ -1,5 +1,6 @@
 import { JSX, useState, useCallback, useEffect } from "react";
 import { Call, StreamCall, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import CallLayout from "./CallLayout";
 
 export default function MyCall({callId}: {callId: string}) : JSX.Element{
     const [call, setCall] = useState<Call | undefined>(undefined)
@@ -40,6 +41,7 @@ export default function MyCall({callId}: {callId: string}) : JSX.Element{
     
     return(
         <StreamCall call={call}>
+            <CallLayout/>
         </StreamCall>
     )
 }
