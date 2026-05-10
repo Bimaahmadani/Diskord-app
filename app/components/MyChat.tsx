@@ -20,6 +20,8 @@ import CustomMessage from "./MessageList/CustomMessage/CustomMessage";
 import { customReactionOptions } from "./MessageList/CustomMessage/customMessageReactions";
 import MessageComposer from "./MessageList/MessageComposer/MessageComposer";
 import { StreamVideo } from "@stream-io/video-react-sdk";
+import { useDiscordContext } from "../contexts/DiscordContext";
+import MyCall from "./MyCall/MyCall";
 
  export default function MyChat({ 
     apiKey, 
@@ -41,6 +43,7 @@ import { StreamVideo } from "@stream-io/video-react-sdk";
         user,
         tokenOrProvider: token,
     });
+    const {callId} = useDiscordContext();
 
     if (!chatClient) {
         return <div>Error, please try again later.</div>;
@@ -56,6 +59,8 @@ import { StreamVideo } from "@stream-io/video-react-sdk";
             <section className="flex h-screen w-screen layout">
             <ServerList/>
             <ChannelList List={CustomChannelList} />
+            {callId && <MyCall callId={callId}/>}
+            {!callId && (  
             <Channel
                 DateSeparator={CustomDateSeparator} 
                 HeaderComponent={CustomChannelHeader}
@@ -67,7 +72,8 @@ import { StreamVideo } from "@stream-io/video-react-sdk";
                     <MessageList />
                     <MessageInput />
                 </Window>
-            </Channel>
+            </Channel> 
+            )}
             </section>
         </Chat>
         </StreamVideo>
