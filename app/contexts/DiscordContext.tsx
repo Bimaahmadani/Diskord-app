@@ -176,19 +176,24 @@ export const DiscordContextProvider: any = ({
             try {
                 const response = await messagingChannel.create();
                 console.log("[DiscordContext - createServer] Response:", response);
-                if(myState.server){
+                const server: DiscordServer = {
+                    id: serverId,
+                    name: name,
+                    image: imageUrl,
+                };
+              
                     await createCall(
                         videoClient,
-                        myState.server,
+                        server,
                         'General Voice Channel',
                         userIds
                     )
-                }
+                
             } catch (err) {
                 console.error(err);
             }
         },
-        [createCall, myState.server]
+        [createCall]
     );
 
     const createChannel = useCallback(
