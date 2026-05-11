@@ -140,3 +140,8 @@ dialog{
   @apply block absolute h-full w-0.5 bg-red-400 rotate-45 rounded-xl m-2;
   content: '';
 }
+
+input[type='radio']{
+  @apply w-6 h-6 mb-0
+  accent-gray-900
+}

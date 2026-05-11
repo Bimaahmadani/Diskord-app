@@ -76,7 +76,7 @@ export function CreateChannelForm():JSX.Element {
     }, [showCreateChannelForm]);
 
     return (
-        <dialog ref={dialogRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl overflow-hidden">
+        <dialog ref={dialogRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl">
             <div className="w-full flex items-center justify-between py-8 px-6">
                 <h2 className="text-3xl font-semibold text-gray-600">Create Channel</h2>
                 <Link href='/'>
@@ -108,7 +108,7 @@ export function CreateChannelForm():JSX.Element {
                             onChange={() => setFormData({ ...formData, channelType: 'text'})}
                         />
                     </div>
-                    <div className="w-full flex space-x-4 items-center bg-grau-100 px-4 py-2 rounded-md">
+                    <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
                      <label 
                             htmlFor="voice"
                             className="flex flex-1 items-center space-x-6"
