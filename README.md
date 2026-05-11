@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). -->
 
-## Getting Started
+## Diskord : The Clone of Discord ©️
 
-First, run the development server:
+This project is my effort in recreating one of the most popular communication platforms in the world. Diskord has all the core features of Discord: text messaging, voice and video communication, channel and server creation, screen sharing, and more. Building this project has been a hands-on journey into learning Next.js and web development as a whole.
+
+<!-- First, run the development server:
 
 ```bash
 npm run dev
@@ -33,4 +35,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details. -->
