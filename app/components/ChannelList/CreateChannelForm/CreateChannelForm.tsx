@@ -2,13 +2,15 @@ import { UserObject } from "@/models/UserObject";
 import { useSearchParams,useRouter } from "next/navigation";
 import { JSX, use, useCallback, useEffect, useRef, useState } from "react";
 import {  useChatContext } from "stream-chat-react";
-import { CloseIcon } from "../../Icons";
+import { CloseIcon, Speaker } from "../../Icons";
 import Link from "next/link";
 import UserRow from "../../UserRow";
 import { useDiscordContext } from "@/app/contexts/DiscordContext";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 
 
 type FormState = {
+    channelType: 'text' | 'voice';
     channelName: string;
     category: string;
     users: UserObject[];
@@ -23,8 +25,10 @@ export function CreateChannelForm():JSX.Element {
     const router = useRouter();
 
     const {client}= useChatContext();
-    const { createChannel } = useDiscordContext();
+    const videoClient = useStreamVideoClient();
+    const { server, createCall, createChannel } = useDiscordContext();
     const initialState: FormState = {
+        channelType: 'text',
         channelName: '',
         category: category ?? '',
         users: [],
@@ -52,6 +56,17 @@ export function CreateChannelForm():JSX.Element {
         loadUsers();
     }, [loadUsers]);
 
+    useEffect(()=>{
+        const category = params.get('category');
+        const isVoice = params.get('isVoice')
+        setFormData({
+            channelType: isVoice ? 'voice' : 'text',
+            channelName: '',
+            category: category ?? '',
+            users: [],
+        })
+    }, [setFormData, params])
+
     useEffect(() => {
         if(showCreateChannelForm && dialogRef.current){
             dialogRef.current.showModal();
@@ -69,6 +84,53 @@ export function CreateChannelForm():JSX.Element {
                 </Link>
             </div>
             <form method="dialog" className="flex flex-col space-y-4 px-6">
+                <div className="space-y-4">
+                    <h3 className="labelTitle">Channel Type</h3>
+                    <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
+                        <label 
+                            htmlFor="text"
+                            className="flex flex-1 items-center space-x-6"
+                        >
+                            <span className="text-4xl text-gray-400">#</span>
+                            <div>
+                                <p className="text-lg text-gray-700 font-semibold">Text</p>
+                                <p className="text-gray-500">
+                                    Send messages, images, GIFs, emoji, opinions, and puns
+                                </p>
+                            </div>
+                        </label>
+                        <input 
+                            type="radio" 
+                            name="channelType"
+                            id="text"
+                            value="text"
+                            checked={formData.channelType === 'text'}
+                            onChange={() => setFormData({ ...formData, channelType: 'text'})}
+                        />
+                    </div>
+                    <div className="w-full flex space-x-4 items-center bg-grau-100 px-4 py-2 rounded-md">
+                     <label 
+                            htmlFor="voice"
+                            className="flex flex-1 items-center space-x-6"
+                        >
+                            <Speaker className="w-7 h-7 text-gray-400"/>
+                            <div>
+                                <p className="text-lg text-gray-700 font-semibold">Voice</p>
+                                <p className="text-gray-500">
+                                    Hang out togther with voice, video, and screen share
+                                </p>
+                            </div>
+                        </label>
+                         <input 
+                            type="radio" 
+                            name="channelType"
+                            id="voice"
+                            value="voice"
+                            checked={formData.channelType === 'voice'}
+                            onChange={() => setFormData({ ...formData, channelType: 'voice'})}
+                        />
+                    </div>
+                </div>
                 <label className="labelTitle" htmlFor="channelName">Channel Name</label>
                 <div className="flex items-center bg-gray-100">
                     <span className="text-2xl p-2 text-gray-500">#</span>
@@ -139,12 +201,24 @@ export function CreateChannelForm():JSX.Element {
             memberIds.push(client.userID);
         }
 
-        createChannel(
-            client,
-            formData.channelName,
-            formData.category,
-            memberIds
-        );
+        switch (formData.channelType){
+            case 'text':
+            createChannel(
+                client,
+                formData.channelName,
+                formData.category,
+                memberIds
+            );
+            case 'voice':
+            if (videoClient && server){
+                createCall(
+                    videoClient,
+                    server,
+                    formData.channelName,
+                    memberIds
+                )
+            }
+    }
     
         setFormData(initialState);
         router.replace('/');
