@@ -76,14 +76,15 @@ export function CreateChannelForm():JSX.Element {
     }, [showCreateChannelForm]);
 
     return (
-        <dialog ref={dialogRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl">
+        <dialog ref={dialogRef} 
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl custom-scrollbar">
             <div className="w-full flex items-center justify-between py-8 px-6">
                 <h2 className="text-3xl font-semibold text-gray-600">Create Channel</h2>
                 <Link href='/'>
                     <CloseIcon className='w-10 h-10 text-gray-400'/>
                 </Link>
             </div>
-            <form method="dialog" className="flex flex-col space-y-4 px-6">
+            <form method="dialog" className="flex flex-col space-y-4 pr-2 pl-6 ">
                 <div className="space-y-4">
                     <h3 className="labelTitle">Channel Type</h3>
                     <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">

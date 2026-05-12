@@ -145,3 +145,32 @@ input[type='radio']{
   @apply w-6 h-6 mb-0
   accent-gray-900
 }
+
+/* app/globals.css */
+
+/* Kustomisasi Scrollbar WebKit (Chrome, Edge, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 20px; /* Membuat scrollbar sangat tipis */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: none; /* Background transparan agar menyatu dengan dialog */
+  margin-top: 8px; /* Memberi jarak dari sudut atas */
+  margin-bottom: 8px; /* Memberi jarak dari sudut bawah */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* Warna abu-abu yang lembut (Tailwind slate-300) */
+  border-radius: 10px; /* Membuat ujung scrollbar membulat */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8; /* Sedikit lebih gelap saat di-hover */
+}
+
+/* Dukungan untuk Firefox */
+.custom-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #cbd5e1 transparent;
+  overflow-y: auto;
+}
