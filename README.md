@@ -1,5 +1,3 @@
-<!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). -->
-
 # Diskord: A Full-Stack Discord Clone ©️
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=for-the-badge&logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Stream Chat](https://img.shields.io/badge/Stream_Chat-SDK-blue?style=for-the-badge) ![Clerk](https://img.shields.io/badge/Clerk-Auth-purple?style=for-the-badge)
@@ -72,5 +70,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-

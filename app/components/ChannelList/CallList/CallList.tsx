@@ -2,7 +2,7 @@ import { JSX, useCallback, useEffect, useState } from "react";
 import { useDiscordContext } from "@/app/contexts/DiscordContext";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { ChevronDown, PlusIcon, Speaker } from "../../Icons";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 
 
 export default function CallList(): JSX.Element{
@@ -49,7 +49,7 @@ export default function CallList(): JSX.Element{
                 </button>
                 <Link
                 className=""
-                href={`/?createChannel=true&isVoice=true&category=Voice Channels`}
+                href={`/?createChannel=true&isVoice=true&category=Voice%20Channels`}
                 >
                     <PlusIcon/>
                 </Link>
