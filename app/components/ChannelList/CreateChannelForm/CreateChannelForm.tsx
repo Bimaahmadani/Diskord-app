@@ -169,7 +169,7 @@ export function CreateChannelForm():JSX.Element {
             </form>
 
             <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200">
-                <Link href={'/'} className="font-semibold py-2 px-4 text-sm text-white bg-red-500 rounded-md">
+                <Link href='/' className="font-semibold py-2 px-4 text-sm text-gray-500">
                     Cancel
                 </Link>
 

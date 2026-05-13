@@ -103,7 +103,7 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
             }}
         >
         <div className="w-full flex items-center justify-between py-8 px-6">
-            <h2 className="text-3xl font-semibold text-gray-600">
+            <h2 className="text-2xl uppercase font-bold text-gray-600">
                 Create a Server
             </h2>
             <button onClick={() => setOpen(false)}>
@@ -153,13 +153,13 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
                 ))}
             </div>
         </form>
-        <div className="flex space-x-6 items-center justify-end p-6 bg-gray-200">
-            <Link href={'/'} className="font-semibold text-gray-500">
+        <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200">
+            <Link href='/' className="font-semibold text-sm text-gray-500">
                 Cancel
             </Link>
             <button type="submit"
             disabled={buttonDisabled()}
-            className={`bg-discord rounded py-2 px-4 text-white font-bold uppercase ${
+            className={`bg-discord rounded py-2 px-4 text-white text-sm font-semibold ${
                 buttonDisabled() ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             onClick={createClicked}>
