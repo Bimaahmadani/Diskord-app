@@ -33,10 +33,11 @@ Make sure you have the following installed:
 
 ### Environment Variables
 
-Before running the project, you need to configure your environment variables. Create a `.env.local` file in the root directory and add your API keys:
+Before running the project, you need to configure your environment variables. First, obtain your credentials by setting up your projects on [Clerk](https://clerk.com/) and [Stream Chat](https://getstream.io/). Create a `.env.local` file in the root directory and add your API keys for Clerk and Stream Chat:
 
 ```env
 # Clerk Authentication Keys
+
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 
