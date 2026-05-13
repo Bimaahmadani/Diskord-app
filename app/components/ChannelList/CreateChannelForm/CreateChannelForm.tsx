@@ -79,9 +79,9 @@ export function CreateChannelForm():JSX.Element {
         <dialog ref={dialogRef} 
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl custom-scrollbar">
             <div className="w-full flex items-center justify-between py-8 px-6">
-                <h2 className="text-3xl font-semibold text-gray-600">Create Channel</h2>
+                <h2 className="text-2xl uppercase font-bold text-gray-600">Create Channel</h2>
                 <Link href='/'>
-                    <CloseIcon className='w-10 h-10 text-gray-400'/>
+                    <CloseIcon className='w-8 h-8 text-gray-400'/>
                 </Link>
             </div>
             <form method="dialog" className="flex flex-col space-y-4 pr-2 pl-6 ">
@@ -118,7 +118,7 @@ export function CreateChannelForm():JSX.Element {
                             <div>
                                 <p className="text-lg text-gray-700 font-semibold">Voice</p>
                                 <p className="text-gray-500">
-                                    Hang out togther with voice, video, and screen share
+                                    Hang out together with voice, video, and screen share
                                 </p>
                             </div>
                         </label>
@@ -168,14 +168,14 @@ export function CreateChannelForm():JSX.Element {
                 </div>
             </form>
 
-            <div className="flex space-x-6 items-center justify-end p-6 bg-gray-200">
-                <Link href={'/'} className="font-semibold text-gray-500">
+            <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200">
+                <Link href={'/'} className="font-semibold py-2 px-4 text-sm text-white bg-red-500 rounded-md">
                     Cancel
                 </Link>
 
                 <button type="submit"
                 disabled={buttonDisabled()}
-                className={`bg-discord rounded py-2 px-4 text-white font-bold uppercase ${
+                className={`bg-discord rounded py-2 px-4 text-white text-sm font-semibold ${
                     buttonDisabled() ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 onClick={createClicked}

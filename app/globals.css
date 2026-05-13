@@ -106,7 +106,7 @@ input[type="checkbox"]{
 }
 
 dialog{
-  width: clamp(30rem, 50%, 50rem);
+  width: clamp(25rem, 50%, 40rem);
 }
 
 .discord-icon{
@@ -142,7 +142,7 @@ dialog{
 }
 
 input[type='radio']{
-  @apply w-6 h-6 mb-0
+  @apply w-5 h-5 mb-0
   accent-gray-900
 }
 
