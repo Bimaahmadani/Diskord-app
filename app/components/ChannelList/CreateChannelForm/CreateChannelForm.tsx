@@ -77,14 +77,16 @@ export function CreateChannelForm():JSX.Element {
 
     return (
         <dialog ref={dialogRef} 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl custom-scrollbar">
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-xl overflow-y-hidden">
             <div className="w-full flex items-center justify-between py-8 px-6">
                 <h2 className="text-2xl uppercase font-bold text-gray-600">Create Channel</h2>
                 <Link href='/'>
                     <CloseIcon className='w-8 h-8 text-gray-400'/>
                 </Link>
             </div>
-            <form method="dialog" className="flex flex-col space-y-4 p-6 ">
+
+            <div className="max-h-[85vh] overflow-y-scroll custom-scrollbar">
+            <form method="dialog" className="flex flex-col space-y-4 pr-2 pl-6 ">
                 <div className="space-y-4">
                     <h3 className="labelTitle">Channel Type</h3>
                     <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
@@ -167,9 +169,9 @@ export function CreateChannelForm():JSX.Element {
                     ))}
                 </div>
             </form>
-
-            <div className="flex space-x-4 items-center justify-end p-4 sticky bottom-0">
-                <Link href='/' className="font-semibold py-2 px-4 text-sm text-gray-500 hover:underline">
+            </div>
+            <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200 sticky bottom-0">
+                <Link href='/' className="font-semibold py-2 px-4 text-sm text-gray-500">
                     Cancel
                 </Link>
 
