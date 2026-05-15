@@ -1,6 +1,6 @@
 import { UserObject } from "@/models/UserObject";
 import { useSearchParams,useRouter } from "next/navigation";
-import { JSX, use, useCallback, useEffect, useRef, useState } from "react";
+import { JSX, useCallback, useEffect, useRef, useState } from "react";
 import {  useChatContext } from "stream-chat-react";
 import { CloseIcon, Speaker } from "../../Icons";
 import Link from "next/link";
@@ -210,35 +210,44 @@ export function CreateChannelForm():JSX.Element {
 
     }
 
-      function createClicked(){
-        const memberIds = formData.users.map((user) => user.id);
-        
-        // Pastikan current user otomatis masuk ke dalam member channel
-        if (client.userID && !memberIds.includes(client.userID)) {
-            memberIds.push(client.userID);
-        }
+    // 1. Tambahkan kata kunci async di sini
+async function createClicked(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault(); // Mencegah sifat bawaan form html agar halaman tidak refresh
 
-        switch (formData.channelType){
-            case 'text':
-            createChannel(
+    const memberIds = formData.users.map((user) => user.id);
+    
+    // Pastikan current user otomatis masuk ke dalam member channel
+    if (client.userID && !memberIds.includes(client.userID)) {
+        memberIds.push(client.userID);
+    }
+
+    switch (formData.channelType) {
+        case 'text':
+            // 2. Tambahkan await agar aplikasi menunggu channel selesai dibuat
+            await createChannel(
                 client,
                 formData.channelName,
                 formData.category,
                 memberIds
             );
-            case 'voice':
+            break; 
+            
+        case 'voice':
             if (videoClient && server){
-                createCall(
+                // 3. Tambahkan await juga di sini
+                await createCall(
                     videoClient,
                     server,
                     formData.channelName,
                     memberIds
-                )
+                );
             }
+            break;
     }
     
-        setFormData(initialState);
-        router.replace('/');
+    // 4. Baris ini HANYA akan dieksekusi SETELAH proses pembuatan di atas beres 100%
+    setFormData(initialState);
+    router.replace('/');
 }
 
 

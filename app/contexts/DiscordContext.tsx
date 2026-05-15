@@ -24,13 +24,14 @@ type DiscordState= {
         name: string,
         category: string,
         userIds: string[]
-    )=> void;
+    ) => Promise<void>; // <--- Ubah ini menjadi Promise<void>
+
     createCall:(
         client: StreamVideoClient,
         server: DiscordServer,
         channelName: string,
         userids: string[]
-    )=> void;
+    ) => Promise<void>; //
     setCall: (callId:string | undefined) => void;
 };
 
@@ -38,9 +39,9 @@ const initialValue: DiscordState = {
     server: undefined,
     callId: undefined,
     channelsByCategories: new Map(),
-    createServer: () => {},
-    changeServer: () => {},
-    createChannel: () => {},
+    createServer: async() => {},
+    changeServer: async() => {},
+    createChannel: async () => {},
     createCall: async() => {},
     setCall: ()=>{},
 };
@@ -204,7 +205,7 @@ export const DiscordContextProvider: any = ({
             userIds: string[]
         ) => {
             if(client.userID) {
-                const channel = client.channel('messaging', {
+                const channel = client.channel('messaging', uuid(), {
                     name: name,
                     members: userIds,
                     data: {
@@ -215,12 +216,19 @@ export const DiscordContextProvider: any = ({
                     }
                 });
                 try {
-                    const response = await channel.create();
-                } catch (err) {
-                    console.error(err);
-                }
+                // 2. Buat (atau 'watch') channel di server Stream
+                await channel.create();
+                
+                // 3. KUNCI UTAMA: Panggil fungsi changeServer untuk REFRESH SIDEBAR!
+                // Ini akan memaksa aplikasi menarik data terbaru yang sudah termasuk channel baru
+                await changeServer(myState.server, client);
+                
+                console.log(`[DiscordContext] Channel ${name} berhasil dibuat!`);
+            } catch (err) {
+                console.error(err);
             }
-        },[myState.server]
+            }
+        },[myState.server, changeServer]
     );
 
     const setCall = useCallback(
