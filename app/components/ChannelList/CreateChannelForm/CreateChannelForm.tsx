@@ -76,68 +76,75 @@ export function CreateChannelForm():JSX.Element {
     }, [showCreateChannelForm]);
 
     return (
-        <dialog ref={dialogRef} 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-xl overflow-y-hidden">
-            <div className="w-full flex items-center justify-between py-8 px-6">
-                <h2 className="text-2xl uppercase font-bold text-gray-600">Create Channel</h2>
-                <Link href='/'>
-                    <CloseIcon className='w-8 h-8 text-gray-400'/>
-                </Link>
+       <dialog ref={dialogRef} 
+    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-transparent p-0 focus:outline-none">
+    
+    {/* INNER WRAPPER: Di sinilah kita mengontrol tinggi total dan rounded-xl */}
+    <div className="flex flex-col w-full bg-white rounded-xl overflow-hidden max-h-[90vh] shadow-2xl">
+        
+        {/* 1. HEADER (Ditahan dengan shrink-0) */}
+        <div className="w-full flex items-center justify-between py-6 px-6 shrink-0 bg-white z-10">
+            <h2 className="text-2xl uppercase font-bold text-gray-600">Create Channel</h2>
+            <Link href='/'>
+                <CloseIcon className='w-8 h-8 text-gray-400 cursor-pointer'/>
+            </Link>
+        </div>
+
+        {/* 2. FORM BODY (Bisa di-scroll dengan flex-1 dan overflow-y-auto) */}
+        <form method="dialog" className="flex-1 flex flex-col space-y-4 pl-6 pr-4 py-2 overflow-y-auto custom-scrollbar">
+            
+            <div className="space-y-4">
+                <h3 className="labelTitle">Channel Type</h3>
+                <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
+                    <label 
+                        htmlFor="text"
+                        className="flex flex-1 items-center space-x-6"
+                    >
+                        <span className="text-4xl text-gray-400">#</span>
+                        <div>
+                            <p className="text-lg text-gray-700 font-semibold">Text</p>
+                            <p className="text-gray-500 text-sm">
+                                Send messages, images, GIFs, emoji, opinions, and puns
+                            </p>
+                        </div>
+                    </label>
+                    <input 
+                        type="radio" 
+                        name="channelType"
+                        id="text"
+                        value="text"
+                        checked={formData.channelType === 'text'}
+                        onChange={() => setFormData({ ...formData, channelType: 'text'})}
+                    />
+                </div>
+                <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
+                    <label 
+                        htmlFor="voice"
+                        className="flex flex-1 items-center space-x-6"
+                    >
+                        <Speaker className="w-7 h-7 text-gray-400"/>
+                        <div>
+                            <p className="text-lg text-gray-700 font-semibold">Voice</p>
+                            <p className="text-gray-500 text-sm">
+                                Hang out together with voice, video, and screen share
+                            </p>
+                        </div>
+                    </label>
+                    <input 
+                        type="radio" 
+                        name="channelType"
+                        id="voice"
+                        value="voice"
+                        checked={formData.channelType === 'voice'}
+                        onChange={() => setFormData({ ...formData, channelType: 'voice'})}
+                    />
+                </div>
             </div>
 
-            <div className="max-h-[85vh] overflow-y-scroll custom-scrollbar">
-            <form method="dialog" className="flex flex-col space-y-4 pr-2 pl-6 ">
-                <div className="space-y-4">
-                    <h3 className="labelTitle">Channel Type</h3>
-                    <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
-                        <label 
-                            htmlFor="text"
-                            className="flex flex-1 items-center space-x-6"
-                        >
-                            <span className="text-4xl text-gray-400">#</span>
-                            <div>
-                                <p className="text-lg text-gray-700 font-semibold">Text</p>
-                                <p className="text-gray-500">
-                                    Send messages, images, GIFs, emoji, opinions, and puns
-                                </p>
-                            </div>
-                        </label>
-                        <input 
-                            type="radio" 
-                            name="channelType"
-                            id="text"
-                            value="text"
-                            checked={formData.channelType === 'text'}
-                            onChange={() => setFormData({ ...formData, channelType: 'text'})}
-                        />
-                    </div>
-                    <div className="w-full flex space-x-4 items-center bg-gray-100 px-4 py-2 rounded-md">
-                     <label 
-                            htmlFor="voice"
-                            className="flex flex-1 items-center space-x-6"
-                        >
-                            <Speaker className="w-7 h-7 text-gray-400"/>
-                            <div>
-                                <p className="text-lg text-gray-700 font-semibold">Voice</p>
-                                <p className="text-gray-500">
-                                    Hang out together with voice, video, and screen share
-                                </p>
-                            </div>
-                        </label>
-                         <input 
-                            type="radio" 
-                            name="channelType"
-                            id="voice"
-                            value="voice"
-                            checked={formData.channelType === 'voice'}
-                            onChange={() => setFormData({ ...formData, channelType: 'voice'})}
-                        />
-                    </div>
-                </div>
-                <label className="labelTitle" htmlFor="channelName">Channel Name</label>
-                <div className="flex items-center bg-gray-100">
-                    <span className="text-2xl p-2 text-gray-500">#</span>
-                    <input 
+            <label className="labelTitle mt-4" htmlFor="channelName">Channel Name</label>
+            <div className="flex items-center bg-gray-100 rounded-md">
+                <span className="text-2xl p-2 px-3 text-gray-500">#</span>
+                <input 
                     type="text"
                     id="channelName"
                     name="channelName" 
@@ -145,14 +152,15 @@ export function CreateChannelForm():JSX.Element {
                     onChange={(e)=>
                         setFormData({ ...formData, channelName: e.target.value })
                     }
-                    />
-                </div>
+                    className="w-full bg-transparent outline-none py-2 pr-2"
+                />
+            </div>
 
-                     <label className="labelTitle flex items-center justify-between" 
-                     htmlFor="category">Category</label>
-                 <div className="flex items-center bg-gray-100">
-                    <span className="text-2xl p-2 text-gray-500">#</span>
-                    <input 
+            <label className="labelTitle flex items-center justify-between mt-4" 
+                htmlFor="category">Category</label>
+            <div className="flex items-center bg-gray-100 rounded-md">
+                <span className="text-2xl p-2 px-3 text-gray-500">#</span>
+                <input 
                     type="text"
                     id="category"
                     name="category" 
@@ -160,32 +168,38 @@ export function CreateChannelForm():JSX.Element {
                     onChange={(e)=>
                         setFormData({ ...formData, category: e.target.value })
                     }
-                    />
-                </div>
-                <h2 className="mb-2 labelTitle">Add Users</h2>
-                <div className="max-h-64 overflow-y-scroll">
-                    {user.map((user)=>(
-                        <UserRow user={user} key={user.id} userChanged={userChanged}/>
-                    ))}
-                </div>
-            </form>
+                    className="w-full bg-transparent outline-none py-2 pr-2"
+                />
             </div>
-            <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200 sticky bottom-0">
-                <Link href='/' className="font-semibold py-2 px-4 text-sm text-gray-500">
-                    Cancel
-                </Link>
 
-                <button type="submit"
+            <h2 className="mb-2 labelTitle mt-4">Add Users</h2>
+            {/* Hapus tinggi maksimal manual di sini, biarkan form utama yang menangani scroll */}
+            <div className="pb-4"> 
+                {user.map((u)=>(
+                    <UserRow user={u} key={u.id} userChanged={userChanged}/>
+                ))}
+            </div>
+        </form>
+
+        {/* 3. FOOTER (Ditahan dengan shrink-0, tidak butuh sticky lagi!) */}
+        <div className="flex space-x-4 items-center justify-end p-4 bg-gray-200 shrink-0">
+            <Link href='/' className="font-semibold py-2 px-4 text-sm text-gray-500 hover:underline">
+                Cancel
+            </Link>
+
+            <button type="submit"
                 disabled={buttonDisabled()}
-                className={`bg-discord rounded py-2 px-4 text-white text-sm font-semibold ${
-                    buttonDisabled() ? 'opacity-50 cursor-not-allowed' : ''
+                className={`bg-discord rounded py-2 px-4 text-white text-sm font-semibold transition-opacity ${
+                    buttonDisabled() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
                 }`}
                 onClick={createClicked}
-                >
-                    Create Channel
-                </button>
-            </div>
-        </dialog>
+            >
+                Create Channel
+            </button>
+        </div>
+
+    </div>
+</dialog>
     );
      function buttonDisabled(): boolean {
         return(
