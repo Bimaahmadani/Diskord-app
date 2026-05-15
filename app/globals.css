@@ -106,7 +106,7 @@ input[type="checkbox"]{
 }
 
 dialog{
-  width: clamp(25rem, 50%, 40rem);
+  width: clamp(25rem, 50%, 30rem);
 }
 
 .discord-icon{

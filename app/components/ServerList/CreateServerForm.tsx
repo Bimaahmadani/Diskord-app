@@ -94,7 +94,7 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
 
     return (
     <dialog 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 space-y-2 rounded-xl" 
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-transparent p-0 focus:outline-none" 
         ref={dialogRef}
          onClick={(e) => {
                 if (e.target === dialogRef.current) {
@@ -102,7 +102,10 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
                 }
             }}
         >
-        <div className="w-full flex items-center justify-between py-8 px-6">
+
+        <div className="flex flex-col w-full bg-white rounded-xl overflow-hidden max-h-[90vh] shadow-2xl">
+
+        <div className="w-full flex items-center justify-between py-6 px-6 shrink-0 bg-white z-10">
             <h2 className="text-2xl uppercase font-bold text-gray-600">
                 Create a Server
             </h2>
@@ -111,7 +114,7 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
             </button>
         </div>
         
-        <form method="dialog" className="flex flex-col space-y-2 px-6" action="">
+        <form method="dialog" className="flex-1 flex flex-col space-y-4 pl-6 pr-4 py-2 overflow-y-auto custom-scrollbar" action="">
             
             {/* Server Name Form */}
             <label className="labelTitle" htmlFor="serverName">
@@ -165,6 +168,8 @@ export default function CreateServerForm({ open, setOpen }: Props): JSX.Element 
             onClick={createClicked}>
                 Create Server
             </button>
+        </div>
+
         </div>
     </dialog>
 );
