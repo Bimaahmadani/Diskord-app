@@ -174,3 +174,26 @@ input[type='radio']{
   scrollbar-color: #cbd5e1 transparent;
   overflow-y: auto;
 }
+
+/* Customisasi Tema Stream Video SDK */
+.str-video {
+  /* Mengubah warna merah (saat mic mati/hangup) menjadi merah Discord */
+  --str-video__error-color: #da373c;
+  
+  /* Mengubah warna latar tombol saat aktif menjadi warna gelap Discord */
+  --str-video__secondary-color: #383a40;
+  
+  /* Mengubah warna hover tombol */
+  --str-video__secondary-color-hover: #4e5058;
+  
+  /* Mengatur border radius tombol agar membulat penuh seperti Discord */
+  --str-video__button-border-radius: 50%;
+  
+  /* Menghilangkan background transparan bawaan dari kontrol video */
+  --str-video__background-color: transparent;
+}
+
+/* Memperbaiki tampilan Speaker Layout bawaan */
+.str-video__speaker-layout__wrapper {
+  padding: 1rem;
+}
