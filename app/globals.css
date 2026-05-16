@@ -193,7 +193,44 @@ input[type='radio']{
   --str-video__background-color: transparent;
 }
 
-/* Memperbaiki tampilan Speaker Layout bawaan */
+/* Memperbaiki wrapper agar tidak ikut menyusut */
 .str-video__speaker-layout__wrapper {
-  padding: 1rem;
+  padding: 1.5rem !important;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 1 !important; /* <--- Tambahkan flex: 1 agar wadahnya membentang penuh */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Memperbarui kotak partisipan agar kebal terhadap kamera mati */
+.str-video__participant-view {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 1200px !important;
+  max-height: 85vh !important;
+  
+  /* --- 3 BARIS INI ADALAH KUNCI RAHASIANYA --- */
+  aspect-ratio: 16 / 9 !important; /* Memaksa kotak selalu berbentuk persegi panjang proporsional */
+  min-height: 300px !important;    /* Sabuk pengaman agar tidak pernah menjadi titik kecil */
+  position: relative !important;   /* Menjaga overlay teks nama tidak berantakan */
+  /* ------------------------------------------- */
+  
+  border-radius: 12px !important;
+  background-color: #111214 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: auto;
+}
+
+/* Memastikan area kosong (placeholder) saat kamera mati mengambil ruang penuh */
+.str-video__video-placeholder {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
