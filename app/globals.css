@@ -206,8 +206,8 @@ input[type='radio']{
 
 /* Memperbarui kotak partisipan agar kebal terhadap kamera mati */
 .str-video__participant-view {
-  width: 100% !important;
-  height: 100% !important;
+  width: 90% !important;
+  height: 90% !important;
   max-width: 1200px !important;
   max-height: 85vh !important;
   
@@ -218,8 +218,6 @@ input[type='radio']{
   /* ------------------------------------------- */
   
   border-radius: 12px !important;
-  background-color: #111214 !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;

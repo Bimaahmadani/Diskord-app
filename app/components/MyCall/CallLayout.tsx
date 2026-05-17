@@ -30,7 +30,7 @@ export default function CallLayout(): JSX.Element{
     }
 
     return(
-        <StreamTheme className="flex flex-col h-full w-full bg-[#313338]">
+        <StreamTheme className="flex flex-col h-full w-full bg-gray-normal">
             {/* Area Video (Atas) */}
             <div className="flex-1 relative overflow-hidden items-center">
                 <SpeakerLayout participantsBarPosition='bottom'/>
@@ -41,8 +41,8 @@ export default function CallLayout(): JSX.Element{
                 </div>
             </div>
 
-            {/* Area Kontrol (Bawah) - Kustomisasi Background & Jarak */}
-            <div className="p-6 flex justify-center items-center gap-6">
+
+            <div className="flex justify-center items-center gap-6">
                 <div className="flex justify-center items-center py-2 px-4 space-x-2 bg-gray-700 border-2 border-gray-400 rounded-xl">
                     <ToggleAudioPublishingButton />
                     <ToggleVideoPublishingButton />
